@@ -2,7 +2,8 @@ import tkinter as tk
 from tkinter import ttk, messagebox, END
 import json
 import requests
-
+import key
+import openai
 class ChatbotGUI:
     def __init__(self, master):
         self.master = master
@@ -28,8 +29,7 @@ class ChatbotGUI:
         self.conversation_history.insert(tk.END, "Chatbot: Hello! How can I help you?\n")
 
         # OpenAI API configuration
-        self.api_url = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
-        self.headers = {"Authorization": "Bearer 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"}
+        openai.api_key = key.OPENAI_KEY
 
     def send_message(self):
         # Get user input
@@ -47,15 +47,44 @@ class ChatbotGUI:
         # Display OpenAI's response in the conversation history
         self.conversation_history.insert(tk.END, f"Chatbot: {response}\n")  # Adjust this line accordingly
 
+    def jsonToArray(self, jsonFile):
+        f = open(jsonFile)
+        data = json.load(f)
+        
+        
 
-    def query_openai(self, payload):
-        response = requests.post(self.api_url, headers=self.headers, json=payload)
-        return response.json()
+    def query_response(self, prompt):
+        messag=[{"role": "system", "content": "You are a chatbot"}]
+        
+        ## build a chat history: you can CONDITION the bot on the style of replies you want to see - also getting weird behaviors... such as KanyeGPT
+        history_bot = ["Yes, I'm ready! Please provide the first paper abstract."]
+    
+        # ask ChatGPT to return STRUCTURED, parsable answers that you can extract easily - often better providing examples of desired behavior (1-2 example often enough)
+        history_user = ["I am a user trying to understand my system and you are a computer systems professional who can help me explain my questions I have about it. I will send you my system logs in .json file and ask you some questions about them and you will respond to me with your best knowledge."]
+
+        for user_message, bot_message in zip(history_user, history_bot):
+            messag.append({"role": "user", "content": str(user_message)})
+            messag.append({"role": "system", "content": str(bot_message)})
+        messag.append({"role": "user", "content": str(prompt)})
+        
+        response = openai.ChatCompletion.create(
+        
+        # please use gtp3.5 although gpt4 is much better for $$
+        model="gpt-3.5-turbo",
+            messages=messag
+        )
+        result = ''
+        for choice in response.choices:
+            result += choice.message.content
+        history_bot.append(result)
+        history_user.append(str(prompt))
+        return result
 
 def main():
     root = tk.Tk()
     chatbot_gui = ChatbotGUI(root)
-    root.mainloop()
+    #root.mainloop()
+    print(chatbot_gui.query_response("What should I do to waste less energy on my system?"))
 
 if __name__ == "__main__":
     main()
