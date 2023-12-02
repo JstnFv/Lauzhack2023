@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>ChatBot for Open Systems</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
   <header>
@@ -17,5 +18,19 @@
           <button id="send-button">Send</button>
       </div>
   </main>
+
+  <script>
+      $(document).ready(function () {
+          $('#send-button').click(function () {
+              $.ajax({
+                  type: 'POST',
+                  url: '',  // Assurez-vous que l'URL correspond à celle que vous avez définie dans urls.py
+                  success: function (data) {
+                      console.log(data.result);  // Manipulez les résultats retournés comme vous le souhaitez
+                  },
+              });
+          });
+      });
+  </script>
 </body>
 </html>
