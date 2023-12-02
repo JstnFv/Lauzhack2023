@@ -1,6 +1,7 @@
 import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import ttk, messagebox, END
 import json
+import requests
 
 class ChatbotGUI:
     def __init__(self, master):
@@ -16,54 +17,45 @@ class ChatbotGUI:
         self.user_input.pack(padx=10, pady=10)
 
         # Button to show all logs
-        self.show_logs_button = ttk.Button(master, text="Show All Logs", command=self.show_logs_window)
+        self.show_logs_button = ttk.Button(master, text="Send Message", command=self.send_message)
         self.show_logs_button.pack(pady=10)
 
-    def show_logs_window(self):
-        # Create a new window to display logs
-        logs_window = tk.Toplevel(self.master)
-        logs_window.title("Logs Window")
+        # Text widget to display conversation history
+        self.conversation_history = tk.Text(master, wrap="word", width=60, height=20)
+        self.conversation_history.pack(padx=10, pady=10)
 
-        # Style configuration for themed widgets in the new window
-        style = ttk.Style(logs_window)
-        style.theme_use('clam')  # You can experiment with different themes
+        # Initialize conversation history
+        self.conversation_history.insert(tk.END, "Chatbot: Hello! How can I help you?\n")
 
-        # Frame to hold the table
-        frame = ttk.Frame(logs_window)
-        frame.pack(padx=10, pady=10)
+        # OpenAI API configuration
+        self.api_url = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
+        self.headers = {"Authorization": "Bearer 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"}
 
-        # Create a Treeview widget
-        tree = ttk.Treeview(frame, columns=("TimeGenerated", "EntryType", "Source", "Message"), show="headings")
+    def send_message(self):
+        # Get user input
+        user_message = self.user_input.get()
 
-        # Define column headings
-        tree.heading("TimeGenerated", text="Time Generated")
-        tree.heading("EntryType", text="Entry Type")
-        tree.heading("Source", text="Source")
-        tree.heading("Message", text="Message")
+        # Display user's message in the conversation history
+        self.conversation_history.insert(tk.END, f"User: {user_message}\n")
 
-        # Add Treeview to the frame
-        tree.pack(expand=True, fill="both")
+        # Call OpenAI API
+        response = self.query_openai({"text": user_message})
 
-        try:
-            # Charger les logs à partir d'un fichier JSON préparé avec UTF-16 encoding
-            with open("system_logs_last_7_days.json", "r", encoding="utf-16") as file:
-                logs_data = json.load(file)
+        # Print the response for debugging
+        print("OpenAI Response:", response)
 
-            # Insert logs into the Treeview
-            for log_entry in logs_data:
-                tree.insert("", "end", values=(log_entry["TimeGenerated"], log_entry["EntryType"], log_entry["Source"], log_entry["Message"]))
+        # Display OpenAI's response in the conversation history
+        self.conversation_history.insert(tk.END, f"Chatbot: {response}\n")  # Adjust this line accordingly
 
-        except Exception as e:
-            error_message = f"Error loading and displaying logs: {e}"
-            messagebox.showerror("Error", error_message)
-            print(error_message)
 
-# Fonction principale
+    def query_openai(self, payload):
+        response = requests.post(self.api_url, headers=self.headers, json=payload)
+        return response.json()
+
 def main():
     root = tk.Tk()
     chatbot_gui = ChatbotGUI(root)
     root.mainloop()
 
-# Appeler la fonction principale si le script est exécuté en tant que programme principal
 if __name__ == "__main__":
     main()
