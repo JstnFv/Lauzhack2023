@@ -7,18 +7,26 @@ class ChatbotGUI:
         self.master = master
         master.title("Chatbot Interface")
 
+        # Style configuration for themed widgets
+        style = ttk.Style()
+        style.theme_use('clam')  # You can experiment with different themes
+
         # Entry widget for user input
-        self.user_input = tk.Entry(master, width=40)
+        self.user_input = ttk.Entry(master, width=40)
         self.user_input.pack(padx=10, pady=10)
 
         # Button to show all logs
-        self.show_logs_button = tk.Button(master, text="Show All Logs", command=self.show_logs_window)
+        self.show_logs_button = ttk.Button(master, text="Show All Logs", command=self.show_logs_window)
         self.show_logs_button.pack(pady=10)
 
     def show_logs_window(self):
         # Create a new window to display logs
         logs_window = tk.Toplevel(self.master)
         logs_window.title("Logs Window")
+
+        # Style configuration for themed widgets in the new window
+        style = ttk.Style(logs_window)
+        style.theme_use('clam')  # You can experiment with different themes
 
         # Frame to hold the table
         frame = ttk.Frame(logs_window)
