@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mainpage.apps.MainpageConfig', #This object was created for us in /mainpage/apps.py
+    'mainpage'
 ]
 
 MIDDLEWARE = [
