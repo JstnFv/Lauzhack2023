@@ -1,21 +1,74 @@
 [
-    {
-      "TimeGenerated": "\/Date(1701523962000)\/",
-      "EntryType": 4,
-      "Source": "Microsoft-Windows-HttpService",
-      "Message": "Supprimez le 18302628907645403137 du groupe d’URL. État 0. ID de processus 11824 chemin d’accès de l’exécutable \\Device\\HarddiskVolume5\\Users\\noafl\\AppData\\Local\\GitHubDesktop\\app-3.3.5\\resources\\app\\git\\mingw64\\bin\\git-credential-manager.exe, S-1-5-21-2583577275-613841834-3546396083-1001\r\n utilisateur"
-    },
-    {
-      "TimeGenerated": "\/Date(1701523972000)\/",
-      "EntryType": 2,
-      "Source": "Security",
-      "Message": "An account was successfully logged on. Subject: Security ID: S-1-5-21-2583577275-613841834-3546396083-1001\r\n Account Name: user123\r\n Account Domain: WORKGROUP\r\n Logon ID: 0x3E7\r\n Logon Type: 3\r\n New Logon: Security ID: S-1-5-21-2583577275-613841834-3546396083-1002\r\n Account Name: admin\r\n Account Domain: WORKGROUP\r\n Logon ID: 0x3E8\r\n Logon GUID: {12345678-1234-5678-1234-567812345678}\r\n Process Information: Process ID: 0x456\r\n Process Name: C:\\Windows\\System32\\svchost.exe\r\n Network Information: Workstation Name: COMPUTER123\r\n Source Network Address: 192.168.1.2\r\n Source Port: 12345\r\n Detailed Authentication Information: Logon Process: NtLmSsp\r\n Authentication Package: NTLM\r\n Transited Services: -\r\n Package Name (NTLM only): NTLM V2\r\n Key Length: 128\r\n"
-    },
-    {
-      "TimeGenerated": "\/Date(1701523982000)\/",
-      "EntryType": 1,
-      "Source": "Application",
-      "Message": "Application Error: Faulting application name: explorer.exe, version: 10.0.19041.1052, time stamp: 0x12345678\r\n Faulting module name: ntdll.dll, version: 10.0.19041.1052, time stamp: 0x12345678\r\n Exception code: 0xc0000374\r\n Fault offset: 0x00000000000f9229\r\n Faulting process id: 0x1234\r\n Faulting application start time: 0x01d7a1b234567812\r\n Faulting application path: C:\\Windows\\explorer.exe\r\n Faulting module path: C:\\Windows\\SYSTEM32\\ntdll.dll\r\n Report Id: 12345678-1234-5678-1234-567812345678\r\n Faulting package full name: \r\n Faulting package-relative application ID: \r\n"
-    }
-  ]
-  
+  {
+    "TimeGenerated": "\/Date(1701524082000)\/",
+    "EntryType": 4,
+    "Source": "Microsoft-Windows-HttpService",
+    "Message": "Supprimez le 92837465029384756012 du groupe d’URL. État 4. ID de processus 12245 chemin d’accès de l’exécutable \\Device\\HarddiskVolume5\\Users\\noafl\\AppData\\Local\\GitHubDesktop\\app-3.3.5\\resources\\app\\git\\mingw64\\bin\\git-credential-manager.exe, S-1-5-21-2583577275-613841834-3546396083-1001\r\n utilisateur"
+  },
+  {
+    "TimeGenerated": "\/Date(1701524092000)\/",
+    "EntryType": 2,
+    "Source": "Security",
+    "Message": "An account was locked out. Subject: Security ID: S-1-5-21-2583577275-613841834-3546396083-1005\r\n Account Name: user_locked\r\n Account Domain: WORKGROUP\r\n Logon ID: 0x3EA\r\n"
+  },
+  {
+    "TimeGenerated": "\/Date(1701524102000)\/",
+    "EntryType": 1,
+    "Source": "Application",
+    "Message": "Application Information: The application 'app3.exe' started successfully. Process ID: 9876, Path: C:\\Program Files\\AnotherApp\\app3.exe\r\n"
+  },
+  {
+    "TimeGenerated": "\/Date(1701524112000)\/",
+    "EntryType": 4,
+    "Source": "Microsoft-Windows-HttpService",
+    "Message": "Ajoutez le 10928374650293847561 au groupe d’URL. État 5. ID de processus 12312 chemin d’accès de l’exécutable \\Device\\HarddiskVolume5\\Users\\noafl\\AppData\\Local\\GitHubDesktop\\app-3.3.5\\resources\\app\\git\\mingw64\\bin\\git-credential-manager.exe, S-1-5-21-2583577275-613841834-3546396083-1001\r\n utilisateur"
+  },
+  {
+    "TimeGenerated": "\/Date(1701524122000)\/",
+    "EntryType": 2,
+    "Source": "Security",
+    "Message": "A user account was deleted. Subject: Security ID: S-1-5-21-2583577275-613841834-3546396083-1006\r\n Account Name: deleted_user\r\n Account Domain: WORKGROUP\r\n Logon ID: 0x3EB\r\n"
+  },
+  {
+    "TimeGenerated": "\/Date(1701524132000)\/",
+    "EntryType": 1,
+    "Source": "Application",
+    "Message": "Application Error: Faulting application name: app4.exe, version: 5.0.6789.1234, time stamp: 0x87654321\r\n Faulting module name: app4.dll, version: 5.0.6789.5678, time stamp: 0x87654321\r\n Exception code: 0xc0000005\r\n Fault offset: 0x000000000012a7e6\r\n Faulting process id: 0xCDEF\r\n Faulting application start time: 0x01d7a1b456789012\r\n Faulting application path: C:\\Program Files\\YetAnotherApp\\app4.exe\r\n Faulting module path: C:\\Program Files\\YetAnotherApp\\app4.dll\r\n Report Id: 87654321-5678-1234-5678-876543210987\r\n Faulting package full name: \r\n Faulting package-relative application ID: \r\n"
+  },
+  {
+    "TimeGenerated": "\/Date(1701524032000)\/",
+    "EntryType": 2,
+    "Source": "Security",
+    "Message": "A new user 'john_doe' was created. User ID: S-1-5-21-2583577275-613841834-3546396083-1003\r\n"
+  },
+  {
+    "TimeGenerated": "\/Date(1701524042000)\/",
+    "EntryType": 1,
+    "Source": "Application",
+    "Message": "Application Warning: The application 'app2.exe' encountered a warning. Warning code: 0x98765432\r\n"
+  },
+  {
+    "TimeGenerated": "\/Date(1701524052000)\/",
+    "EntryType": 4,
+    "Source": "Microsoft-Windows-HttpService",
+    "Message": "Ajoutez le 83920174650293847560 au groupe d’URL. État 3. ID de processus 12178 chemin d’accès de l’exécutable \\Device\\HarddiskVolume5\\Users\\noafl\\AppData\\Local\\GitHubDesktop\\app-3.3.5\\resources\\app\\git\\mingw64\\bin\\git-credential-manager.exe, S-1-5-21-2583577275-613841834-3546396083-1001\r\n utilisateur"
+  },
+  {
+    "TimeGenerated": "\/Date(1701524062000)\/",
+    "EntryType": 2,
+    "Source": "Security",
+    "Message": "An account was successfully logged on. Subject: Security ID: S-1-5-21-2583577275-613841834-3546396083-1004\r\n Account Name: user789\r\n Account Domain: WORKGROUP\r\n Logon ID: 0x3E9\r\n Logon Type: 2\r\n"
+  },
+  {
+    "TimeGenerated": "\/Date(1701524072000)\/",
+    "EntryType": 1,
+    "Source": "Application",
+    "Message": "Application Error: Faulting application name: service.exe, version: 8.0.1234.5678, time stamp: 0x56781234\r\n Faulting module name: kernel32.dll, version: 10.0.19041.1052, time stamp: 0x56781234\r\n Exception code: 0xc0000409\r\n Fault offset: 0x000000000012a7e6\r\n Faulting process id: 0xABCD\r\n Faulting application start time: 0x01d7a1b345678123\r\n Faulting application path: C:\\Program Files\\ExampleService\\service.exe\r\n Faulting module path: C:\\Windows\\System32\\kernel32.dll\r\n Report Id: 56781234-5678-1234-5678-567812345678\r\n Faulting package full name: \r\n Faulting package-relative application ID: \r\n"
+  },
+  {
+    "TimeGenerated": "\/Date(1701524142000)\/",
+    "EntryType": 5,
+    "Source": "System",
+    "Message": "The system is shutting down. Reason: User initiated\r\nShutdown Type: Reboot\r\nComment: User requested a system reboot.\r\n"
+  }
+] 
