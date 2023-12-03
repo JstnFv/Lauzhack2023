@@ -17,4 +17,4 @@ def log_system_events(days):
         print(f"PowerShell stderr: {e.stderr.decode('utf-8')}")
 
 # Call the function to log system events for the last 7 days
-log_system_events("30")
+log_system_events("1")
