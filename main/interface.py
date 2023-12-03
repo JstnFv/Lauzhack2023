@@ -23,13 +23,19 @@ class ChatbotGUI:
             "Okay! I will use the database you have given me and give you my best answer!"
         )
 
+
     def add_prompt(self, user_message):
         self.history_user.append(user_message)
         messag = [{"role": "system", "content": "You are a chatbot."}]
-        for user_message, bot_message in zip(self.history_user, self.history_bot):
+        
+        # Ajoutez l'historique de l'utilisateur sans la dernière question
+        for user_message, bot_message in zip(self.history_user[:-1], self.history_bot):
             messag.append({"role": "user", "content": str(user_message)})
             messag.append({"role": "system", "content": str(bot_message)})
-        messag.append({"role": "user", "content": str(user_message)})
+
+        # Ajoutez la dernière question de l'utilisateur
+        messag.append({"role": "user", "content": str(self.history_user[-1])})
+
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo", messages=messag
         )
@@ -38,6 +44,8 @@ class ChatbotGUI:
             result += choice.message.content
         self.history_bot.append(result)
         return result
+
+
 
 
 def main():
