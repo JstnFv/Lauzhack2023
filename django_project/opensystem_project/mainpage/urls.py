@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='members'),
-    path('', views.execute_prompt_vue, name='execute_prompt_vue')
+    path('execute_prompt/', views.execute_prompt_vue, name='execute_prompt_vue')
     ]

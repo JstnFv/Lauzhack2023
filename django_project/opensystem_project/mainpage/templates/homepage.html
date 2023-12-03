@@ -14,7 +14,7 @@
         <div id="chatbot-container">
         </div>
         <div id="user-input">
-            <input type="text" id="message-input" placeholder="What can I do for you today?">
+            <input type="text" id="message-input" placeholder="What can I do for you today?" onkeydown="if(event.keyCode==13) $('#send-button').click()">
             <button id="send-button">Send</button>
         </div>
     </main>
@@ -49,15 +49,35 @@
                     setCookie('csrftoken', csrf_token, 1);  // Set the cookie to expire in 1 day (adjust as needed)
                 }
 
+                // Get user message
+                var userMessage = $('#message-input').val();
+
+                // Check if the input is empty
+                if (!userMessage.trim()) {
+                    alert('Please enter a message.');
+                    return;
+                }
+
+                // Add user message to chatbot-container
+                $('#chatbot-container').append('<p>User: ' + userMessage + '</p>');
+
+                // Clear the input field
+                $('#message-input').val('');
+
                 // Send the CSRF token and message content with the POST request
                 $.ajax({
                     type: 'POST',
-                    url: '',  // Make sure the URL corresponds to the one you defined in urls.py
+                    url: 'execute_prompt/',  // Make sure the URL corresponds to the one you defined in urls.py
                     headers: {'X-CSRFToken': csrf_token},  // Include the CSRF token in the headers
-                    data: { message: $('#message-input').val() },  // Include the message content in the data
+                    data: { message: userMessage,
+                        file_name: 'system_logs_last_30_days.json' },  // Include the message content in the data
                     success: function (data) {
-                        console.log(data);  // Handle the returned results as needed
+                        // Add chatbot response to chatbot-container
+                        $('#chatbot-container').append('<p>George the robot: ' + data.result + '</p>');
                     },
+                    error: function (error) {
+                        console.error("Error:", error);  // Display errors if any
+                    }
                 });
             });
         });
