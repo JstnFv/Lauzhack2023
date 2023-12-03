@@ -1,36 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>ChatBot for Open Systems</title>
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <meta charset="UTF-8">
+    <title>ChatBot for Open Systems</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Chatbot Website</h1>
-  </header>
+    <header>
+        <h1>Chatbot Website</h1>
+    </header>
 
-  <main>
-      <div id="chatbot-container">
-      </div>
-      <div id="user-input">
-          <input type="text" id="message-input" placeholder="What can I do for you today ?">
-          <button id="send-button">Send</button>
-      </div>
-  </main>
+    <main>
+        <div id="chatbot-container">
+        </div>
+        <div id="user-input">
+            <input type="text" id="message-input" placeholder="What can I do for you today?">
+            <button id="send-button">Send</button>
+        </div>
+    </main>
 
-  <script>
-      $(document).ready(function () {
-          $('#send-button').click(function () {
-              $.ajax({
-                  type: 'POST',
-                  url: '',  // Assurez-vous que l'URL correspond à celle que vous avez définie dans urls.py
-                  success: function (data) {
-                      console.log(data.result);  // Manipulez les résultats retournés comme vous le souhaitez
-                  },
-              });
-          });
-      });
-  </script>
+    <script>
+        // Function to get the value of a cookie by its name
+        function getCookie(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+
+        // Function to set a cookie
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + value + expires + "; path=/";
+        }
+
+        $(document).ready(function () {
+            $('#send-button').click(function () {
+                // Get the CSRF token from the cookie
+                var csrf_token = getCookie('csrftoken');
+
+                if (!csrf_token) {
+                    // Generate a new CSRF token and set it as a cookie
+                    csrf_token = 'your_generated_token';  // Replace with your method of generating a CSRF token
+                    setCookie('csrftoken', csrf_token, 1);  // Set the cookie to expire in 1 day (adjust as needed)
+                }
+
+                // Send the CSRF token and message content with the POST request
+                $.ajax({
+                    type: 'POST',
+                    url: '',  // Make sure the URL corresponds to the one you defined in urls.py
+                    headers: {'X-CSRFToken': csrf_token},  // Include the CSRF token in the headers
+                    data: { message: $('#message-input').val() },  // Include the message content in the data
+                    success: function (data) {
+                        console.log(data);  // Handle the returned results as needed
+                    },
+                });
+            });
+        });
+    </script>
 </body>
 </html>

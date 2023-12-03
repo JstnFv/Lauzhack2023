@@ -83,6 +83,9 @@ class ChatbotGUI:
         history_bot.append(result)
         history_user.append(str(prompt))
         return result
+    
+    def test(self):
+        return "Here"
 
 def main():
     root = tk.Tk()
@@ -90,7 +93,7 @@ def main():
     #root.mainloop()
     df = chatbot_gui.jsonToArray("system_logs_last_7_days.json")
     print("CHATGPT RESPONSE:\n")
-    print(chatbot_gui.query_response("How is my network connection behaving?",df))
+    print(chatbot_gui.query_response("Hi ! How are you today ?",df))
 
 if __name__ == "__main__":
     main()
