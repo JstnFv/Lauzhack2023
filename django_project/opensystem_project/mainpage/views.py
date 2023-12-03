@@ -23,20 +23,20 @@ def home(request):
 def execute_prompt_vue(request):
     chatbot_gui = ChatbotGUI()
     # root.mainloop()
-    #empty_df = pd.DataFrame()  # DataFrame vide pour tester
+    empty_df = pd.DataFrame()  # DataFrame vide pour tester
     file_name = request.POST.get('file_name', 'system_logs_last_30_days.json')
     
     # Construct the file path dynamically
     file_path = f"C:\\Users\\noafl\\Documents\\GitHub\\Lauzhack2023\\dataBases\\{file_name}"
     
     # Load the JSON file into a DataFrame
-    df = chatbot_gui.jsonToArray(file_path)
+    #df = chatbot_gui.jsonToArray(file_path)
     
     # Utilisez request.POST pour récupérer les données du formulaire
     user_message = request.POST.get('message', '')  
     
     # Utilisez le message récupéré dans query_response
-    result = chatbot_gui.query_response(user_message, df)
+    result = chatbot_gui.start_query_session(user_message, empty_df)
     
     # Renvoie la réponse en tant que JSON
     return JsonResponse({'result': result})

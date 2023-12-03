@@ -4,6 +4,76 @@
     <meta charset="UTF-8">
     <title>ChatBot for Open Systems</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+            :root {
+                --color1: #414141;
+                --color2: #50608d;
+                --color3: #fff0db;
+                --color4: #ffffff;
+                --color5: #000000;
+            }
+
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                font-family: "Verdana";
+                color: var(--color4);
+                background-color: var(--color2);
+                font-size: 20px;
+                letter-spacing: 1px;
+            }
+
+            h1 {
+                text-align: center;
+                padding-bottom: 40px;
+                margin: 10px;
+                margin-top: 20px;
+            }
+
+            .discussion-container {
+                background-color: var(--color1);
+                border-radius: 15px;
+                border: 2px solid var(--color4);
+                padding: 10px;
+                margin: 20px;
+                min-height: 300px;
+                display: flex;
+                align-items: flex-end;
+            }
+
+            #user-input {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            input {
+                border: none;
+                width: 80%;
+                border-radius: 15px;
+                margin-left: 10px;
+            }
+
+            button {
+                color: #fff;
+                text-align: center;
+                letter-spacing: 0.2px;
+                border-radius: 16px;
+                background-color: #667ec2;
+                width: 15%;
+                padding: 10px 50px;
+                margin-right: 10px
+            }
+
+            p {
+                color: var(--color5);
+            }
+    </style>
 </head>
 <body>
     <header>
