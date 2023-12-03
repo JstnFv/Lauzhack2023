@@ -13,8 +13,11 @@ sys.path.append('C:\\Users\\noafl\\Documents\\GitHub\\Lauzhack2023\\main')
 sys.path.append('C:\\Users\\noafl\\Documents\\GitHub\\Lauzhack2023\\dataBases')
 from main.interface import ChatbotGUI
 
-df = pd.DataFrame()  # DataFrame vide pour tester
+#df = pd.DataFrame()  # DataFrame vide pour tester
 chatbot_gui = ChatbotGUI()
+#df = pd.read_json("C:\\Users\\noafl\\Documents\\GitHub\\Lauzhack2023\\dataBases\\system_logs_last_7_days.json", encoding="utf-16")
+df = pd.read_json("C:\\Users\\noafl\\Documents\\GitHub\\Lauzhack2023\\dataBases\\smallGPT_db.json")
+
 chatbot_gui.initialize_chatbot(df)
 
 def home(request):

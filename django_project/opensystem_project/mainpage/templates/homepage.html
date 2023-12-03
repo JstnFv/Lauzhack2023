@@ -1,13 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>ChatBot for Open Systems</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <style>
             :root {
-                --color1: #414141;
-                --color2: #50608d;
+                --color1: #ff7e43;
+                --color2: rgb(131, 168, 64);
                 --color3: #fff0db;
                 --color4: #ffffff;
                 --color5: #000000;
@@ -20,21 +22,40 @@
 
             body {
                 margin: 0;
-                font-family: "Verdana";
+                font-family: "Montserrat";
                 color: var(--color4);
-                background-color: var(--color2);
+                background-color: var(--color4);
                 font-size: 20px;
                 letter-spacing: 1px;
             }
 
             h1 {
                 text-align: center;
-                padding-bottom: 40px;
                 margin: 10px;
-                margin-top: 20px;
+                margin-top: 10px;
+                font-size: x-large;
+                color: var(--color2);
             }
 
-            .discussion-container {
+            header {
+                display: grid;
+                justify-content: center; /* Center horizontally */
+                align-items: center;
+            }
+
+            header * {
+                display: flex;
+                justify-content: center; /* Center horizontally within the grid item */
+                align-items: center;
+            }
+
+            #logo {
+                margin-top: 20px;
+                height: 50px;      /* Set the fixed height */
+                width: auto;
+            }
+
+            .chat-container {
                 background-color: var(--color1);
                 border-radius: 15px;
                 border: 2px solid var(--color4);
@@ -42,7 +63,13 @@
                 margin: 20px;
                 min-height: 300px;
                 display: flex;
+                flex-wrap: wrap;
                 align-items: flex-end;
+                border:5px solid var(--color2);
+            }
+
+            #chatbot-container {
+                width: 90%;
             }
 
             #user-input {
@@ -50,42 +77,82 @@
                 justify-content: space-between;
                 width: 100%;
                 margin-bottom: 20px;
+                flex-basis: 1;
             }
 
             input {
-                border: none;
-                width: 80%;
+                border: 2px solid var(--color2);
+                width: 90%;
                 border-radius: 15px;
                 margin-left: 10px;
+                padding-left: 10px;
+            }
+            
+            input::placeholder {
+                color: var(--color5);
             }
 
             button {
-                color: #fff;
+                color: var(--color4);
                 text-align: center;
-                letter-spacing: 0.2px;
-                border-radius: 16px;
-                background-color: #667ec2;
-                width: 15%;
-                padding: 10px 50px;
+                border-radius: 15px;
+                font-size: medium;
+                background-color: var(--color1);
+                border: 2px solid var(--color2);
+                width: 7%;
+                padding: 10px 0px;
                 margin-right: 10px
             }
 
+            button {
+                background-color: var(--color1);
+                border: 2px solid var(--color2);
+                transition: transform 0.3s ease-in-out; /* Add a general transition for transform */
+            }
+
+                button:hover {
+                transform: scale(1.2); /* Scale to 120% on hover */
+                cursor: pointer;
+            }
+
+                button:not(:hover) {
+                transform: scale(1); /* Return to the original size when not in hover state */
+            }
+
+
             p {
                 color: var(--color5);
+                padding: 15px;
+            }
+
+            .right {
+                text-align: right;
+            }
+
+            .quick-description {
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
     </style>
 </head>
 <body>
     <header>
-        <h1>Chatbot Website</h1>
+        <div><img id="logo" src="{% static 'assets/logo.png' %}" alt="logo"></div>
+        <h1>George the Robot</h1>
     </header>
 
     <main>
-        <div id="chatbot-container">
+        <div class="quick-description">
+            <p>Empowering System Understanding: Your Virtual Systems Expert</p>
         </div>
-        <div id="user-input">
-            <input type="text" id="message-input" placeholder="What can I do for you today?" onkeydown="if(event.keyCode==13) $('#send-button').click()">
-            <button id="send-button">Send</button>
+        <div class="chat-container">
+            <div id="chatbot-container">
+            </div>
+            <div id="user-input">
+                <input type="text" id="message-input" placeholder="Ask something to George..." onkeydown="if(event.keyCode==13) $('#send-button').click()">
+                <button id="send-button">Send</button>
+            </div>
         </div>
     </main>
 
@@ -129,7 +196,7 @@
                 }
 
                 // Add user message to chatbot-container
-                $('#chatbot-container').append('<p>User: ' + userMessage + '</p>');
+                $('#chatbot-container').append('<p style="color: rgb(255, 255, 255)"><span style="color: rgb(0, 0, 0) ;">User : </span>' + userMessage + '</p>');
 
                 // Clear the input field
                 $('#message-input').val('');
@@ -143,7 +210,8 @@
                         file_name: 'system_logs_last_30_days.json' },  // Include the message content in the data
                     success: function (data) {
                         // Add chatbot response to chatbot-container
-                        $('#chatbot-container').append('<p>George the robot: ' + data.result + '</p>');
+                        $('#chatbot-container').append('<p class="right"><span style="color: rgb(255, 255, 255) ;">George the robot : </span> ' + data.result + '</p>'
+);
                     },
                     error: function (error) {
                         console.error("Error:", error);  // Display errors if any

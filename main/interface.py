@@ -14,14 +14,16 @@ class ChatbotGUI:
     def initialize_chatbot(self, dataFrame):
         self.history_bot = ["I'm ready! Ask me any question about your system"]
         self.history_user = [
-            "I am a user trying to understand my system and you are a computer systems professional who can help me explain my questions I have about it. For each answer you give, you need to show proof for the answer directly copied from the (Message) column in the database. For example, if someone asks, what installations have happened in the system? You can reply with, there have been _ number of installations that have happened in the system. Examples of things you have installed include: 1. An antivirus shown from the log: Installation réussie : Windows a installé la mise à jour suivante : Mise à jour de la sélection disjointe pour Microsoft Defender Antivirus – 2267602 Ko (version 1.401.1546.0) – Canal actuel (large). Please use the dataset given here:"
+            "I am a user trying to understand my system and you are a computer systems professional who can help me explain my questions I have about it. For each answer you give, you need to show proof for the answer directly copied from the (Message) column in the database. But do not make it to hard to read and you should adapt for the knowledge of the user (start by supposing that the user know nothing about systems and logs). For example, if someone asks, what installations have happened in the system? You can reply with, there have been _ number of installations that have happened in the system. Examples of things you have installed include: 1. An antivirus shown from the log: Installation réussie : Windows a installé la mise à jour suivante : Mise à jour de la sélection disjointe pour Microsoft Defender Antivirus – 2267602 Ko (version 1.401.1546.0) – Canal actuel (large). Please use the dataset given here:"
         ]
         self.history_user.append(
-            "This is the database you should analyze from: " + dataFrame
-        )
+            "This is the database you should analyze from:\n" + dataFrame.to_string(index=False)
+            )
+
         self.history_bot.append(
             "Okay! I will use the database you have given me and give you my best answer!"
         )
+
 
 
     def add_prompt(self, user_message):
